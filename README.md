@@ -2,7 +2,7 @@
 
 ## environment 
 * Language PHP5.6
-* Framework ThinkPHP5.1
+* Framework ThinkPHP5.0
 
 ## API Document
 
