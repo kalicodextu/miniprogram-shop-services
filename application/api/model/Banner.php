@@ -9,12 +9,17 @@
 namespace app\api\model;
 
 
-use think\Exception;
+use think\Db;
 
 class Banner
 {
     public static function getBannerByID($id)
     {
-        return null;
+        // $result = Db::query('select * from banner_item where banner_id=?', [$id]);
+        $result = Db::table('banner_item')
+            ->fetchSql()
+            ->where('banner_id', '=', $id)
+            ->select();
+        return $result;
     }
 }
