@@ -9,17 +9,18 @@
 namespace app\api\model;
 
 
-use think\Db;
+use think\Model;
 
-class Banner
+class Banner extends BaseModel
 {
+    public function items()
+    {
+        return $this->hasMany('BannerItem', 'banner_id', 'id');
+    }
+
     public static function getBannerByID($id)
     {
-        // $result = Db::query('select * from banner_item where banner_id=?', [$id]);
-        $result = Db::table('banner_item')
-            ->fetchSql()
-            ->where('banner_id', '=', $id)
-            ->select();
-        return $result;
+        $banner = self::with(['items', 'items.img'])->find($id);
+        return $banner;
     }
 }
