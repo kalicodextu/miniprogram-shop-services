@@ -6,6 +6,7 @@
  * Time: 下午9:32
  */
 return [
-    'img_prefix' => 'http://zerg.cn/images'
+    'img_prefix' => 'http://zerg.cn/images',
+    'token_expire_in' => 7200
 ];
 
