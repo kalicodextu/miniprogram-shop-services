@@ -11,7 +11,7 @@ namespace app\api\model;
 
 class Product extends BaseModel
 {
-    protected $hidden = ['delete_time', 'create_time', 'pivot', 'from', 'category_id', 'main_img_id'];
+    protected $hidden = ['delete_time', 'create_time', 'update_time', 'pivot', 'from', 'category_id', 'main_img_id'];
 
     public function getMainImgUrlAttr($value, $data)
     {
@@ -22,5 +22,10 @@ class Product extends BaseModel
     {
         $product = self::limit($count)->order('create_time desc')->select();
         return $product;
+    }
+
+    public static function getProductsByCategoryId($categoryID){
+        $products = self::where('category_id', '=', $categoryID)->select();
+        return $products;
     }
 }
