@@ -16,10 +16,11 @@ use app\lib\exception\ProductException;
 
 class Product
 {
-    public function getRecent($count=15){
+    public function getRecent($count = 15)
+    {
         (new Count())->goCheck();
         $products = ProductModel::getMostRecent($count);
-        if($products->isEmpty()){
+        if ($products->isEmpty()) {
             throw new ProductException();
         }
         $products = $products->hidden(['summary']);
@@ -30,11 +31,21 @@ class Product
     {
         (new IDMustBePositiveInt())->goCheck();
         $products = ProductModel::getProductsByCategoryId($id);
-        if($products->isEmpty()){
+        if ($products->isEmpty()) {
             throw new ProductException();
         }
         $products = $products->hidden(['summary']);
         return $products;
+    }
+
+    public function getOne($id)
+    {
+        (new IDMustBePositiveInt())->goCheck();
+        $product = ProductModel::getProductDetail($id);
+        if (!$product) {
+            throw new ProductException();
+        }
+        return $product;
     }
 
 }
